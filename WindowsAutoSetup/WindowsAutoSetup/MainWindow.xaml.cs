@@ -26,39 +26,34 @@ namespace WindowsAutoSetup
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-
-        private RootObject data;
-
-        private DomainInfo domainInfo;
-
-        public String domainString { get; set; }
-
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            data = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(@"C:\Users\james\Desktop\example.json"));
-            domainInfo = data.domainInfo;
-            domainString = domainInfo.name;
-
-            DomainHeader.Text = domainInfo.name;
-            DomainUsername.Text = domainInfo.username;
-            DomainPassword.Password = domainInfo.password;
-
-            foreach (Data.Application app in data.applications)
-            {
-                ListBoxItem item = new ListBoxItem();
-                item.Content = app.name;
-                AppsBox.Items.Add(item);
-            }
+            _mainFrame.NavigationService.Navigate(new WelcomePage());
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Domain: " + domainInfo.name + " Username: " + DomainUsername.Text + " Password: " + DomainPassword.Password);
+            _mainFrame.NavigationService.Navigate(new DomainPage());
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            _mainFrame.NavigationService.GoBack();
+        }
+
+        private void _mainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            BackButton.IsEnabled = _mainFrame.NavigationService.CanGoBack;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to cancel?", "Jimmy Deploy", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
         }
     }
 }

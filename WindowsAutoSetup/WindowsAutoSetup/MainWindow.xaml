@@ -6,17 +6,24 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:WindowsAutoSetup"
         mc:Ignorable="d"
-        Title="Jimmy Deploy" Height="450" Width="800">
+        Title="Jimmy Deploy" Height="450" Width="700">
 
-    <Grid>
-        <Button Content="Load" HorizontalAlignment="Left" Margin="34,34,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
-        <TextBox x:Name="DomainUsername" HorizontalAlignment="Left" Height="18
-                 " Margin="224,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <PasswordBox x:Name="DomainPassword" HorizontalAlignment="Left" Margin="224,120,0,0" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="NextButton" Content="Load" HorizontalAlignment="Left" Margin="711,385,0,0" VerticalAlignment="Top" Width="74" Click="NextButton_Click"/>
-        <TextBlock x:Name="DomainHeader" HorizontalAlignment="Left" Margin="224,59,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.312"/>
-        <ListBox x:Name="AppsBox" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="120" Margin="224,178,0,0" BorderBrush="Black" BorderThickness="0.5"/>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="about" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
 
 
-    </Grid>
+    <DockPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4,0,5">
+                <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Right" Margin="0,0,5,-0.5" Width="74" Height="28" Click="BackButton_Click"/>
+                <Button x:Name="NextButton" Content="Next" HorizontalAlignment="Right" Margin="0,0,5,0" Width="74" Click="NextButton_Click"/>
+                <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,5,0" Width="75" Click="CancelButton_Click"/>
+            </StackPanel>
+        </Grid>
+        <Separator DockPanel.Dock="Bottom" Margin="5,0,5,0" Background="#FFD4D4D4"/>
+        <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden" Navigated="_mainFrame_Navigated"/>
+    </DockPanel>
 </Controls:MetroWindow>

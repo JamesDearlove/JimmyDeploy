@@ -1,0 +1,37 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using WindowsAutoSetup.Data;
+
+namespace WindowsAutoSetup
+{
+    public class Config
+    {
+        private static Config config;
+        private static RootObject data;
+
+        private Config()
+        {
+            data = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(@"C:\Users\james\Desktop\example.json"));
+        }
+
+        public static Config get()
+        {
+            if (data == null)
+            {
+                config = new Config();
+            }
+            return config;
+        }
+
+        public DomainInfo domainInfo()
+        {
+            return data.domainInfo;
+        }
+    }
+}
