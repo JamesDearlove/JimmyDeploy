@@ -15,8 +15,8 @@ namespace WindowsAutoSetup.Data
     public class DomainInfo
     {
         public string name { get; set; }
-        public object username { get; set; }
-        public object password { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
         public bool reboot { get; set; }
     }
 

@@ -7,12 +7,16 @@
         xmlns:local="clr-namespace:WindowsAutoSetup"
         mc:Ignorable="d"
         Title="Jimmy Deploy" Height="450" Width="800">
-    
+
     <Grid>
         <Button Content="Load" HorizontalAlignment="Left" Margin="34,34,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
-        <TextBox x:Name="DomainUsername" HorizontalAlignment="Left" Height="23" Margin="224,34,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="DomainUsername_Copy" HorizontalAlignment="Left" Height="23" Margin="224,34,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <PasswordBox HorizontalAlignment="Left" Margin="224,74,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="DomainUsername" HorizontalAlignment="Left" Height="18
+                 " Margin="224,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <PasswordBox x:Name="DomainPassword" HorizontalAlignment="Left" Margin="224,120,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="NextButton" Content="Load" HorizontalAlignment="Left" Margin="711,385,0,0" VerticalAlignment="Top" Width="74" Click="NextButton_Click"/>
+        <TextBlock x:Name="DomainHeader" HorizontalAlignment="Left" Margin="224,59,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" RenderTransformOrigin="-0.172,0.312"/>
+        <ListBox x:Name="AppsBox" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="120" Margin="224,178,0,0" BorderBrush="Black" BorderThickness="0.5"/>
+
 
     </Grid>
 </Controls:MetroWindow>

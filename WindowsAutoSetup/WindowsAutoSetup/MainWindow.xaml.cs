@@ -40,11 +40,25 @@ namespace WindowsAutoSetup
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // read file into a string and deserialize JSON to a type
             data = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(@"C:\Users\james\Desktop\example.json"));
             domainInfo = data.domainInfo;
             domainString = domainInfo.name;
-            MessageBox.Show(domainInfo.ToString());
+
+            DomainHeader.Text = domainInfo.name;
+            DomainUsername.Text = domainInfo.username;
+            DomainPassword.Password = domainInfo.password;
+
+            foreach (Data.Application app in data.applications)
+            {
+                ListBoxItem item = new ListBoxItem();
+                item.Content = app.name;
+                AppsBox.Items.Add(item);
+            }
+        }
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Domain: " + domainInfo.name + " Username: " + DomainUsername.Text + " Password: " + DomainPassword.Password);
         }
     }
 }
