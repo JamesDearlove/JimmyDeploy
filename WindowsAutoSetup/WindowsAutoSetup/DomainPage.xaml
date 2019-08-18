@@ -30,8 +30,8 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="17*"/>
-                    <ColumnDefinition Width="44*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
             </Grid>
         </StackPanel>

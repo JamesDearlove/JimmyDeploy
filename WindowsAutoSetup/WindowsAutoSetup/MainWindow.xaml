@@ -6,7 +6,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:local="clr-namespace:WindowsAutoSetup"
         mc:Ignorable="d"
-        Title="Jimmy Deploy" Height="450" Width="700">
+        Title="Jimmy Deploy" Height="450" Width="700" Closing="MetroWindow_Closing">
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
@@ -22,6 +22,7 @@
                 <Button x:Name="NextButton" Content="Next" HorizontalAlignment="Right" Margin="0,0,5,0" Width="74" Click="NextButton_Click"/>
                 <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,5,0" Width="75" Click="CancelButton_Click"/>
             </StackPanel>
+            <TextBlock x:Name="RestartText" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="restart required" VerticalAlignment="Top" Foreground="#FFCCCCCC" Visibility="Hidden"/>
         </Grid>
         <Separator DockPanel.Dock="Bottom" Margin="5,0,5,0" Background="#FFD4D4D4"/>
         <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden" Navigated="_mainFrame_Navigated"/>
