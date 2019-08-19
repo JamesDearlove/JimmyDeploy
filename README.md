@@ -1,4 +1,4 @@
-# WindowsAutoSetup
+# JimmyDeploy
 An app that configures Windows post-install
 
 ## But Why?

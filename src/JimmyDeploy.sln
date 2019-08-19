@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsAutoSetup", "WindowsAutoSetup\WindowsAutoSetup.csproj", "{51F0C931-6C59-4687-AADD-48954EEB1ABF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JimmyDeploy", "JimmyDeploy\JimmyDeploy.csproj", "{51F0C931-6C59-4687-AADD-48954EEB1ABF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

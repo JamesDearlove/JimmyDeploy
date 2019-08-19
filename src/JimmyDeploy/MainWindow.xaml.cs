@@ -15,11 +15,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using WindowsAutoSetup.Data;
+using JimmyDeploy.Data;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using System.Windows.Media.Animation;
 
-namespace WindowsAutoSetup
+namespace JimmyDeploy
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

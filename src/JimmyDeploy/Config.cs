@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using WindowsAutoSetup.Data;
+using JimmyDeploy.Data;
 
-namespace WindowsAutoSetup
+namespace JimmyDeploy
 {
     public class Config
     {

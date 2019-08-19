@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WindowsAutoSetup
+namespace JimmyDeploy
 {
     /// <summary>
     /// Interaction logic for ComputerSettingsPage.xaml
