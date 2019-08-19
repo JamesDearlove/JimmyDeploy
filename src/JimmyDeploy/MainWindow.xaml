@@ -18,11 +18,12 @@
     <DockPanel>
         <Grid DockPanel.Dock="Bottom">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4,0,5">
-                <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Right" Margin="0,0,5,-0.5" Width="74" Height="28" Click="BackButton_Click"/>
+                <Controls:ProgressRing x:Name="ProgressIndicator" IsActive="False" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,10,0"/>
+                <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Right" Margin="0,0,5,0" Width="74" Height="28" Click="BackButton_Click"/>
                 <Button x:Name="NextButton" Content="Next" HorizontalAlignment="Right" Margin="0,0,5,0" Width="74" Click="NextButton_Click"/>
                 <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,5,0" Width="75" Click="CancelButton_Click"/>
             </StackPanel>
-            <Controls:ProgressRing x:Name="ProgressIndicator" IsActive="False" HorizontalAlignment="Left" Width="25" Height="25" Margin="5,0,0,0"/>
+            
         </Grid>
         <Separator DockPanel.Dock="Bottom" Margin="5,0,5,0" Background="#FFD4D4D4"/>
         <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden" Navigated="_mainFrame_Navigated"/>
