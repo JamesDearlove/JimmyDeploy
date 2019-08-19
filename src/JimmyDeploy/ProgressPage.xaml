@@ -1,4 +1,4 @@
-﻿<Page x:Class="JimmyDeploy.AppsPage"
+﻿<Page x:Class="JimmyDeploy.ProgressPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,23 +7,22 @@
       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AppsPage">
+      Title="AppsPage" Loaded="Page_Loaded">
 
     <controls:MetroContentControl>
         <Grid Margin="40">
             <StackPanel>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Here's the Apps We Found" FontSize="20"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Setting up This Computer" FontSize="20"/>
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,10,0,0">
-                    We found the following apps in the configuration.
+                    Sit back, we'll take over from here. Your computer may restart several times while we complete the list of tasks below.
                 </TextBlock>
                 <ListView x:Name="AppsList" Margin="0,15,0,0" Height="300" MinHeight="200" ItemsSource="{Binding Mode=OneWay}">
                     <ListView.View>
                         <GridView AllowsColumnReorder="True">
-                            <GridViewColumn Width="80" DisplayMemberBinding="{Binding order}" Header="Order"/>
-                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding name}" Header="App Name"/>
-                            <GridViewColumn Width="250" DisplayMemberBinding="{Binding command}" Header="Command"/>
-                            <GridViewColumn Width="120" DisplayMemberBinding="{Binding beforeDomain}" Header="Before Domain"/>
-                            <GridViewColumn Width="60" DisplayMemberBinding="{Binding reboot}" Header="Reboot"/>
+                            <GridViewColumn Width="60" DisplayMemberBinding="{Binding order}" Header="Order"/>
+                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding name}" Header="Task"/>
+                            <GridViewColumn Width="250" DisplayMemberBinding="{Binding details}" Header="Details"/>
+                            <GridViewColumn Width="120" DisplayMemberBinding="{Binding progress}" Header="Progress"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

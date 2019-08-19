@@ -27,23 +27,13 @@ namespace JimmyDeploy
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public Page[] navigationOrder = new Page[] { new WelcomePage(), new ComputerSettingsPage(), new DomainPage(), new AppsPage() };
+        public Page[] navigationOrder = new Page[] { new WelcomePage(), new ComputerSettingsPage(), new DomainPage(), new AppsPage(), new ConfirmPage(), new ProgressPage()};
         public int navigationLoc = 0;
 
         public MainWindow()
         {
             InitializeComponent();
             _mainFrame.NavigationService.Navigate(navigationOrder[0]);
-        }
-
-        private void NextButton_Click(object sender, RoutedEventArgs e)
-        {
-            navigationLoc += 1;
-            _mainFrame.NavigationService.Navigate(navigationOrder[navigationLoc]);
-            if (navigationLoc + 1 >= navigationOrder.Length)
-            {
-                NextButton.IsEnabled = false;
-            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -56,16 +46,19 @@ namespace JimmyDeploy
             }
         }
 
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            navigationLoc += 1;
+            _mainFrame.NavigationService.Navigate(navigationOrder[navigationLoc]);
+            if (navigationLoc + 1 >= navigationOrder.Length)
+            {
+                NextButton.IsEnabled = false;
+            }
+        }
+
         private void _mainFrame_Navigated(object sender, NavigationEventArgs e)
         {
             BackButton.IsEnabled = _mainFrame.NavigationService.CanGoBack;
-            if (Config.get().restartRequired)
-            {
-                RestartText.Visibility = Visibility.Visible;
-            } else
-            {
-                RestartText.Visibility = Visibility.Hidden;
-            }
         }
 
         private async void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -77,9 +70,19 @@ namespace JimmyDeploy
             }
         }
 
+        public void enableBackBtn(bool value)
+        {
+            BackButton.IsEnabled = value;
+        }
+
         public void enableNextBtn(bool value)
         {
             NextButton.IsEnabled = value;
+        }
+
+        public void enableIndicator(bool value)
+        {
+            ProgressIndicator.IsActive = value;
         }
 
         private async void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -97,6 +100,11 @@ namespace JimmyDeploy
             Version version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version;
             string currentV = string.Format("Version: {0}.{1}", version.Major, version.Minor);
             await this.ShowMessageAsync("About", "Jimmy Deployer - Written by James Dearlove \n" + currentV, MessageDialogStyle.Affirmative);
+        }
+
+        public void updateNextButton(string value)
+        {
+            NextButton.Content = value;
         }
     }
 }

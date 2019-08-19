@@ -38,4 +38,12 @@ namespace JimmyDeploy.Data
         public List<Application> applications { get; set; }
         public List<string> order { get; set; }
     }
+
+    public class Task
+    {
+        public int order { get; set; }
+        public string name { get; set; }
+        public string details { get; set; }
+        public string progress { get; set; }
+    }
 }

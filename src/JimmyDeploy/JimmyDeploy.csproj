@@ -89,6 +89,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ProgressPage.xaml.cs">
+      <DependentUpon>ProgressPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmPage.xaml.cs">
+      <DependentUpon>ConfirmPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AppsPage.xaml.cs">
       <DependentUpon>AppsPage.xaml</DependentUpon>
     </Compile>
@@ -103,6 +109,14 @@
     <Compile Include="WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
+    <Page Include="ProgressPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ConfirmPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="AppsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

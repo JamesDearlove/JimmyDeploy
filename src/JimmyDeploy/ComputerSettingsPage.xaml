@@ -12,7 +12,7 @@
     <controls:MetroContentControl>
         <Grid Margin="40">
             <StackPanel>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Let's Give this Computer a Name" FontSize="20"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Let's Give This Computer a Name" FontSize="20"/>
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,10,0,0">
                     Let's start by giving this computer a name and a description.
                 </TextBlock>
