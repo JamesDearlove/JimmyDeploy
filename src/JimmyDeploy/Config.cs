@@ -32,9 +32,14 @@ namespace JimmyDeploy
             return config;
         }
 
-        public DomainInfo domainInfo()
+        public DomainInfo getDomainInfo()
         {
             return data.domainInfo;
+        }
+
+        public List<Application> getApplications()
+        {
+            return data.applications;
         }
     }
 }

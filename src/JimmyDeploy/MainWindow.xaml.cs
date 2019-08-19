@@ -91,5 +91,12 @@ namespace JimmyDeploy
                 System.Windows.Application.Current.Shutdown();
             }
         }
+
+        private async void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            Version version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version;
+            string currentV = string.Format("Version: {0}.{1}", version.Major, version.Minor);
+            await this.ShowMessageAsync("About", "Jimmy Deployer - Written by James Dearlove \n" + currentV, MessageDialogStyle.Affirmative);
+        }
     }
 }

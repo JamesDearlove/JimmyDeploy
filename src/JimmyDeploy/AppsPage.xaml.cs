@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using JimmyDeploy.Data;
+
 namespace JimmyDeploy
 {
     /// <summary>
@@ -23,6 +25,9 @@ namespace JimmyDeploy
         public AppsPage()
         {
             InitializeComponent();
+
+            DataContext = Config.get().getApplications();
         }
+
     }
 }

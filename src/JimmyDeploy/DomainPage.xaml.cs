@@ -32,7 +32,7 @@ namespace JimmyDeploy
 
         private void getData()
         {
-            domainInfo = Config.get().domainInfo();
+            domainInfo = Config.get().getDomainInfo();
             if (domainInfo.name != null)
             {
                 DomainBox.Text = domainInfo.name;

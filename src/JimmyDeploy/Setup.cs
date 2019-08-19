@@ -12,7 +12,7 @@ namespace JimmyDeploy
     {
         public void joinDomain()
         {
-            DomainInfo info = Config.get().domainInfo();
+            DomainInfo info = Config.get().getDomainInfo();
         }
 
         public void enableSignin()
