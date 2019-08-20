@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -108,7 +109,43 @@ namespace JimmyDeploy
 
         public static bool joinDomain()
         {
+            // https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/joindomainorworkgroup-method-in-class-win32-computersystem
+            // https://juanchif.wordpress.com/2009/12/09/joining-a-computer-to-a-domain-programatically-from-c/
+            int JOIN_DOMAIN = 1;
+            int ACCT_CREATE = 2;
+            int ACCT_DELETE = 4;
+            int WIN9X_UPGRADE = 16;
+            int DOMAIN_JOIN_IF_JOINED = 32;
+            int JOIN_UNSECURE = 64;
+            int MACHINE_PASSWORD_PASSED = 128;
+            int DEFERRED_SPN_SET = 256;
+            int INSTALL_INVOCATION = 262144;
+
             DomainInfo info = Config.get().getDomainInfo();
+
+            int parameters = JOIN_DOMAIN | ACCT_CREATE | DOMAIN_JOIN_IF_JOINED;  
+
+            MessageBox.Show(info.Username + "@" + info.Name);
+            MessageBox.Show(info.Password);
+
+            object[] methodArgs = { info.Name, info.Password, info.Username + "@" + info.Name, null, parameters };
+
+            ManagementObject computerSystem = new ManagementObject("Win32_ComputerSystem.Name='" + Environment.MachineName + "'");
+            computerSystem.Scope.Options.Authentication = System.Management.AuthenticationLevel.PacketPrivacy;
+            computerSystem.Scope.Options.Impersonation = ImpersonationLevel.Impersonate;
+            computerSystem.Scope.Options.EnablePrivileges = true;
+
+            object Oresult = computerSystem.InvokeMethod("JoinDomainOrWorkgroup", methodArgs);
+
+            int result = (int)Convert.ToInt32(Oresult);
+
+            if (result == 0)
+            {
+                Console.WriteLine("Joined Successfully!");
+                return true;
+            }
+            MessageBox.Show(result.ToString());
+            //TODO: Add error codes here, 
             return false;
         }
 

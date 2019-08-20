@@ -57,7 +57,10 @@ namespace JimmyDeploy
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            domainInfo.Password = PasswordBox.Password;
+            if (!string.IsNullOrWhiteSpace(PasswordBox.Password))
+            {
+                domainInfo.Password = PasswordBox.Password;
+            }
         }
     }
 }
