@@ -11,22 +11,24 @@
 
     <controls:MetroContentControl>
         <Grid Margin="40">
+            <Button x:Name="testbtn" Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="462,4,0,0" Click="Button_Click"/>
             <StackPanel>
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Setting up This Computer" FontSize="20"/>
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,10,0,0">
                     Sit back, we'll take over from here. Your computer may restart several times while we complete the list of tasks below.
                 </TextBlock>
-                <ListView x:Name="AppsList" Margin="0,15,0,0" Height="300" MinHeight="200" ItemsSource="{Binding Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListView x:Name="AppsList" Margin="0,15,0,0" Height="300" MinHeight="200" ItemsSource="{Binding Mode=OneWay, NotifyOnTargetUpdated=True}" TargetUpdated="AppsList_TargetUpdated">
                     <ListView.View>
                         <GridView AllowsColumnReorder="True">
-                            <GridViewColumn Width="60" DisplayMemberBinding="{Binding order}" Header="Order"/>
-                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding name}" Header="Task"/>
-                            <GridViewColumn Width="250" DisplayMemberBinding="{Binding details}" Header="Details"/>
-                            <GridViewColumn Width="120" DisplayMemberBinding="{Binding progress}" Header="Progress"/>
+                            <GridViewColumn Width="60" DisplayMemberBinding="{Binding order, Mode=OneWay}" Header="Order"/>
+                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding name, Mode=OneWay}" Header="Task"/>
+                            <GridViewColumn Width="250" DisplayMemberBinding="{Binding details, Mode=OneWay}" Header="Details"/>
+                            <GridViewColumn Width="120" DisplayMemberBinding="{Binding progress, Mode=OneWay}" Header="Progress"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
                 
+
             </StackPanel>
         </Grid>
     </controls:MetroContentControl>

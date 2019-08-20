@@ -39,7 +39,7 @@ namespace JimmyDeploy
 
         private Config()
         {
-            configLocation = @"C:\Users\james.dearlove\Desktop\Auto Install\JimmyDeploy.json";
+            configLocation = @"JimmyDeploy.json";
             restartRequired = false;
 
             data.applications = data.applications.OrderBy(o => o.order).ToList();
@@ -64,13 +64,16 @@ namespace JimmyDeploy
             return data.applications;
         }
 
-        public List<Data.Task> getTaskList()
+        public List<Data.Task> GetTasks()
         {
-            setupTaskList();
+            //if (tasks == null)
+            //{
+            //    setupTaskList();
+            //}
             return tasks;
         }
 
-        public List<Data.Task> setupTaskList()
+        public void setupTaskList()
         {
             tasks = new List<Data.Task>();
             int order = 0;
@@ -114,7 +117,6 @@ namespace JimmyDeploy
                         break;
                 }
             }
-            return tasks;
         }
     }
 }

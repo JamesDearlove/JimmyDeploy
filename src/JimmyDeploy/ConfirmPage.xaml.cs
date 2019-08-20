@@ -26,12 +26,18 @@ namespace JimmyDeploy
         {
             InitializeComponent();
 
-            DataContext = Config.get().setupTaskList();
+            Config.get().setupTaskList();
+            DataContext = Config.get().tasks;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = Config.get().setupTaskList();
+            //TODO: Fix this
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Config.get().tasks[0].progress = "Yeet";
         }
     }
 }
