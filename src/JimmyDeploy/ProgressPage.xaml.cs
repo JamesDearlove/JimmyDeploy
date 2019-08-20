@@ -48,12 +48,7 @@ namespace JimmyDeploy
 
         private void AppsList_TargetUpdated(object sender, DataTransferEventArgs e)
         {
-            MessageBox.Show("hi");
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Config.get().tasks[0].progress = "Yeet";
+            
         }
     }
 }

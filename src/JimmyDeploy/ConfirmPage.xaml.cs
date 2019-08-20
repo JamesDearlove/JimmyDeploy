@@ -35,9 +35,5 @@ namespace JimmyDeploy
             //TODO: Fix this
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Config.get().tasks[0].progress = "Yeet";
-        }
     }
 }

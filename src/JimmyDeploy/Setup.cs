@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Windows;
 using JimmyDeploy.Data;
 
 namespace JimmyDeploy
@@ -28,13 +28,13 @@ namespace JimmyDeploy
                             result = startReboot();
                             break;
                         case "Install App":
-                            result = installApp((Application)t.taskObj);
+                            result = installApp((Data.Application)t.taskObj);
                             break;
                         case "Join Domain":
                             result = joinDomain();
                             break;
                         case "Rename Computer":
-                            //result = changeComputerInfo();
+                            result = changeComputerInfo();
                             break;
                     }
                     t.progress = result ? "Complete" : "Failed";
@@ -58,10 +58,10 @@ namespace JimmyDeploy
         public static bool changeComputerInfo()
         {
             bool result = true;
-            if (!changeComputerName())
-            {
-                result = false;
-            }
+            //if (!changeComputerName())
+            //{
+            //    result = false;
+            //}
             if (!changeComputerDescription())
             {
                 result = false;
@@ -95,8 +95,8 @@ namespace JimmyDeploy
         {
             ProcessStartInfo process = new ProcessStartInfo();
             process.FileName = "net.exe";
-
-            process.Arguments = "config server /srvcomment:'" + Config.get().compDesc + "'";
+            //MessageBox.Show("config server / srvcomment:\"" + Config.get().compDesc + "\" ");
+            process.Arguments = "config server /srvcomment:\"" + Config.get().compDesc + "\"";
 
             using (Process proc = Process.Start(process))
             {
@@ -117,7 +117,7 @@ namespace JimmyDeploy
             return false;
         }
 
-        public static bool installApp(Application app)
+        public static bool installApp(Data.Application app)
         {
             return false;
         }
