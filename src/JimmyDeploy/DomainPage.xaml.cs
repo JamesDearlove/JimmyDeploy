@@ -33,21 +33,31 @@ namespace JimmyDeploy
         private void getData()
         {
             domainInfo = Config.get().getDomainInfo();
-            if (domainInfo.name != null)
+            if (domainInfo.Name != null)
             {
-                DomainBox.Text = domainInfo.name;
+                DomainBox.Text = domainInfo.Name;
                 DomainBox.IsEnabled = false;
             }
-            if (domainInfo.username != null)
+            if (domainInfo.Username != null)
             {
-                UsernameBox.Text = domainInfo.username;
+                UsernameBox.Text = domainInfo.Username;
                 UsernameBox.IsEnabled = false;
-            if (domainInfo.password != null)
+            if (domainInfo.Password != null)
             {
-                PasswordBox.Password = domainInfo.password;
+                PasswordBox.Password = domainInfo.Password;
                 PasswordBox.IsEnabled = false;
             }
             }
+        }
+
+        private void UsernameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            domainInfo.Username = UsernameBox.Text;
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            domainInfo.Password = PasswordBox.Password;
         }
     }
 }

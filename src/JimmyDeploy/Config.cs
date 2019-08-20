@@ -14,13 +14,32 @@ namespace JimmyDeploy
     {
         private static Config config;
         private static RootObject data;
-        private List<Data.Task> tasks;
+        
+        public string compName { get; set; }
+        public string compDesc { get; set; }
 
+        public List<Data.Task> tasks { get; set; }
         public bool restartRequired { get; set; }
+
+        private string configFile;
+
+        public string configLocation
+        {
+            get
+            {
+                return configFile;
+            }
+            set
+            {
+                configFile = value;
+                data = null;
+                data = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(value));
+            }
+        }
 
         private Config()
         {
-            data = JsonConvert.DeserializeObject<RootObject>(File.ReadAllText(@"C:\Users\james\Desktop\example.json"));
+            configLocation = @"C:\Users\james.dearlove\Desktop\Auto Install\JimmyDeploy.json";
             restartRequired = false;
 
             data.applications = data.applications.OrderBy(o => o.order).ToList();
@@ -47,14 +66,11 @@ namespace JimmyDeploy
 
         public List<Data.Task> getTaskList()
         {
-            if (tasks == null)
-            {
-                setupTaskList();
-            }
+            setupTaskList();
             return tasks;
         }
 
-        private void setupTaskList()
+        public List<Data.Task> setupTaskList()
         {
             tasks = new List<Data.Task>();
             int order = 0;
@@ -67,13 +83,13 @@ namespace JimmyDeploy
                         {
                             if (a.beforeDomain)
                             {
-                                tasks.Add(new Data.Task { order = order, name = "Install App", details = a.name, progress = "" });
+                                tasks.Add(new Data.Task { order = order, name = "Install App", details = a.name, progress = "", taskObj = a });
                             }
                         }
                         order++;
                         break;
                     case "reboot":
-                        tasks.Add(new Data.Task { order = order, name = "Reboot", details = "", progress = "" });
+                        tasks.Add(new Data.Task { order = order, name = "Reboot", details = "", progress = "", });
                         order++;
                         break;
                     case "applications":
@@ -81,18 +97,24 @@ namespace JimmyDeploy
                         {
                             if (!a.beforeDomain)
                             {
-                                tasks.Add(new Data.Task { order = order, name = "Install App", details = a.name, progress = "" });
+                                tasks.Add(new Data.Task { order = order, name = "Install App", details = a.name, progress = "", taskObj = a });
+                                order++;
                             }
                         }
-                        order++;
                         break;
                     case "domainJoin":
-                        string domainDetails = string.Format("Name: {0} Username: {1}", data.domainInfo.name, data.domainInfo.username);
+                        string domainDetails = string.Format("Name: {0} Username: {1}", data.domainInfo.Name, data.domainInfo.Username);
                         tasks.Add(new Data.Task { order = order, name = "Join Domain", details = domainDetails, progress = "" });
+                        order++;
+                        break;
+                    case "computerName":
+                        string computerDetails = string.Format("Name: {0} Description: {1}", compName, compDesc);
+                        tasks.Add(new Data.Task { order = order, name = "Rename Computer", details = computerDetails, progress = "" });
                         order++;
                         break;
                 }
             }
+            return tasks;
         }
     }
 }

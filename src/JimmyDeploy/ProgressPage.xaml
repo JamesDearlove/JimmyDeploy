@@ -16,7 +16,7 @@
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,10,0,0">
                     Sit back, we'll take over from here. Your computer may restart several times while we complete the list of tasks below.
                 </TextBlock>
-                <ListView x:Name="AppsList" Margin="0,15,0,0" Height="300" MinHeight="200" ItemsSource="{Binding Mode=OneWay}">
+                <ListView x:Name="AppsList" Margin="0,15,0,0" Height="300" MinHeight="200" ItemsSource="{Binding Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView AllowsColumnReorder="True">
                             <GridViewColumn Width="60" DisplayMemberBinding="{Binding order}" Header="Order"/>
@@ -26,6 +26,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+                
             </StackPanel>
         </Grid>
     </controls:MetroContentControl>

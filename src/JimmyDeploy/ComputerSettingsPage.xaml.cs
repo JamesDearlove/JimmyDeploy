@@ -56,5 +56,14 @@ namespace JimmyDeploy
             }
         }
 
+        private void CompNameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Config.get().compName = CompNameBox.Text;
+        }
+
+        private void CompDescBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Config.get().compDesc = CompDescBox.Text;
+        }
     }
 }

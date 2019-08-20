@@ -26,7 +26,12 @@ namespace JimmyDeploy
         {
             InitializeComponent();
 
-            DataContext = Config.get().getTaskList();
+            DataContext = Config.get().setupTaskList();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = Config.get().setupTaskList();
         }
     }
 }

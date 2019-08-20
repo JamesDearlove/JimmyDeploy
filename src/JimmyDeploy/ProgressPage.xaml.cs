@@ -22,11 +22,19 @@ namespace JimmyDeploy
     /// </summary>
     public partial class ProgressPage : Page
     {
-        public ProgressPage()
+        public ProgressPage(int step)
         {
             InitializeComponent();
 
-            DataContext = Config.get().getTaskList();
+            Config.get().setupTaskList();
+            if (step != 0)
+            {
+                for (int i = 0; i < step; i++)
+                {
+                    Config.get().tasks[i].progress = "Done";
+                }
+            }
+            DataContext = Config.get().tasks;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -35,6 +43,13 @@ namespace JimmyDeploy
             mainWindow.enableBackBtn(false);
             mainWindow.enableNextBtn(false);
             mainWindow.enableIndicator(true);
+
+            Setup.start();
+        }
+
+        private void AppsList_TargetUpdated(object sender, DataTransferEventArgs e)
+        {
+
         }
     }
 }

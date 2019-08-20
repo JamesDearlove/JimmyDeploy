@@ -27,11 +27,18 @@ namespace JimmyDeploy
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public Page[] navigationOrder = new Page[] { new WelcomePage(), new ComputerSettingsPage(), new DomainPage(), new AppsPage(), new ConfirmPage(), new ProgressPage()};
+        public Page[] navigationOrder;
         public int navigationLoc = 0;
 
-        public MainWindow()
+        public MainWindow(int step)
         {
+            if (step == 0)
+            {
+                navigationOrder = new Page[] { new WelcomePage(), new ComputerSettingsPage(), new DomainPage(), new AppsPage(), new ConfirmPage(), new ProgressPage(0)};
+            } else
+            {
+                navigationOrder = new Page[] { new ProgressPage(step) };
+            }
             InitializeComponent();
             _mainFrame.NavigationService.Navigate(navigationOrder[0]);
         }
