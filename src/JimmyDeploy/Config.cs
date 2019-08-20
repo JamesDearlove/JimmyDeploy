@@ -19,7 +19,7 @@ namespace JimmyDeploy
         public string compDesc { get; set; }
 
         public List<Data.Task> tasks { get; set; }
-        public bool restartRequired { get; set; }
+        public bool autoLogin { get; set; }
 
         private string configFile;
 
@@ -40,7 +40,6 @@ namespace JimmyDeploy
         private Config()
         {
             configLocation = @"JimmyDeploy.json";
-            restartRequired = false;
 
             data.applications = data.applications.OrderBy(o => o.order).ToList();
         }
@@ -66,10 +65,6 @@ namespace JimmyDeploy
 
         public List<Data.Task> GetTasks()
         {
-            //if (tasks == null)
-            //{
-            //    setupTaskList();
-            //}
             return tasks;
         }
 

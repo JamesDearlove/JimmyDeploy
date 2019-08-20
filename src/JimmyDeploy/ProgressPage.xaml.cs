@@ -28,6 +28,17 @@ namespace JimmyDeploy
 
             if (step != 0)
             {
+                Config.get().autoLogin = true;
+                Config.get().setupTaskList();
+                Setup.removeStartup();
+
+                if (step > Config.get().tasks.Count)
+                {
+                    Setup.disableAutoLogin();
+                    MessageBox.Show("Done");
+                    System.Windows.Application.Current.Shutdown();
+                }
+
                 for (int i = 0; i < step; i++)
                 {
                     Config.get().tasks[i].progress = "Done";

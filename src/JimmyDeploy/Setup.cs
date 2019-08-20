@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Management;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using IWshRuntimeLibrary;
 using JimmyDeploy.Data;
+using Microsoft.Win32;
 
 namespace JimmyDeploy
 {
     public class Setup
     {
-        static int step = 0;
+        static int step = 1;
 
         public static void start()
         {
@@ -21,48 +24,86 @@ namespace JimmyDeploy
             {
                 foreach (Data.Task t in Config.get().tasks)
                 {
-                    t.progress = "Running";
-                    bool result = false;
-                    switch (t.name)
+                    if (string.IsNullOrWhiteSpace(t.progress))
                     {
-                        case "Reboot":
-                            result = startReboot();
-                            break;
-                        case "Install App":
-                            result = installApp((Data.Application)t.taskObj);
-                            break;
-                        case "Join Domain":
-                            result = joinDomain();
-                            break;
-                        case "Rename Computer":
-                            result = changeComputerInfo();
-                            break;
+                        t.progress = "Running";
+                        bool result = false;
+                        switch (t.name)
+                        {
+                            case "Reboot":
+                                result = startReboot();
+                                if (result)
+                                {
+                                    System.Windows.Application.Current.Shutdown();
+                                }
+                                break;
+                            case "Install App":
+                                result = installApp((Data.Application)t.taskObj);
+                                break;
+                            case "Join Domain":
+                                result = joinDomain();
+                                break;
+                            case "Rename Computer":
+                                result = changeComputerInfo();
+                                break;
+                        }
+                        t.progress = result ? "Complete" : "Failed";
                     }
-                    t.progress = result ? "Complete" : "Failed";
+                    step++;
                 }
-                
-
+             
                 Console.WriteLine("Hello, world");
             }).Start();
         }
 
         public static bool enableAutoLogin()
         {
-            return false;
+            DomainInfo domain = Config.get().getDomainInfo();
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
+
+            key.SetValue("AutoAdminLogon", 1, RegistryValueKind.String);
+            key.SetValue("DefaultDomainName", domain.Name, RegistryValueKind.String);
+            key.SetValue("DefaultUserName", domain.Username, RegistryValueKind.String);
+            key.SetValue("DefaultPassword", domain.Password, RegistryValueKind.String);
+            key.Close();
+
+            return true;
         }
 
         public static bool disableAutoLogin()
         {
-            return false;
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
+
+            key.SetValue("AutoAdminLogon", 0, RegistryValueKind.String);
+            key.SetValue("DefaultDomainName", "", RegistryValueKind.String);
+            key.SetValue("DefaultUserName", "", RegistryValueKind.String);
+            key.SetValue("DefaultPassword", "", RegistryValueKind.String);
+            key.Close();
+
+            return true;
+        }
+
+        public static void enableUAC()
+        {
+            RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", true);
+            key.SetValue("EnableLUA", 1);
+            key.Close();
+        }
+
+        public static void removeStartup()
+        {
+            var startupFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonStartup);
+
+            System.IO.File.Delete(Path.Combine(startupFolderPath, @"JimmyDeploy.lnk"));
         }
 
         public static bool changeComputerInfo()
         {
             bool result = true;
-            //if (!changeComputerName())
-            //{
-            //    result = false;
-            //}
+            if (!changeComputerName())
+            {
+                result = false;
+            }
             if (!changeComputerDescription())
             {
                 result = false;
@@ -96,7 +137,6 @@ namespace JimmyDeploy
         {
             ProcessStartInfo process = new ProcessStartInfo();
             process.FileName = "net.exe";
-            //MessageBox.Show("config server / srvcomment:\"" + Config.get().compDesc + "\" ");
             process.Arguments = "config server /srvcomment:\"" + Config.get().compDesc + "\"";
 
             using (Process proc = Process.Start(process))
@@ -151,7 +191,42 @@ namespace JimmyDeploy
 
         public static bool startReboot()
         {
-            return false;
+            if (!Config.get().autoLogin)
+            {
+                enableAutoLogin();
+            }
+            enableStartup();
+
+            //MessageBox.Show("Reboot hit");
+            //return true;
+            ProcessStartInfo process = new ProcessStartInfo();
+            process.FileName = "shutdown";
+            process.Arguments = "/r /f /t 0";
+
+            using (Process proc = Process.Start(process))
+            {
+                proc.WaitForExit();
+                Console.WriteLine("Exit code = " + proc.ExitCode);
+                return proc.ExitCode == 0 ? true : false;
+            }
+        }
+
+        public static bool enableStartup()
+        {
+            // https://bytescout.com/blog/create-shortcuts-in-c-and-vbnet.html
+            step++;
+            var args = step.ToString();
+
+            var startupFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonStartup);
+            var shell = new WshShell();
+            var shortCutLinkFilePath = Path.Combine(startupFolderPath, @"JimmyDeploy.lnk");
+            var windowsApplicationShortcut = (IWshShortcut)shell.CreateShortcut(shortCutLinkFilePath);
+            windowsApplicationShortcut.Description = "How to create short for application example";
+            windowsApplicationShortcut.WorkingDirectory = System.Windows.Forms.Application.StartupPath;
+            windowsApplicationShortcut.TargetPath = System.Windows.Forms.Application.ExecutablePath;
+            windowsApplicationShortcut.Arguments = args;
+            windowsApplicationShortcut.Save();
+            return true;
         }
 
         public static bool installApp(Data.Application app)

@@ -37,6 +37,7 @@ namespace JimmyDeploy
                 navigationOrder = new Page[] { new WelcomePage(), new ComputerSettingsPage(), new DomainPage(), new AppsPage(), new ConfirmPage(), new ProgressPage(0)};
             } else
             {
+                MessageBox.Show("Startup Task started");
                 navigationOrder = new Page[] { new ProgressPage(step) };
             }
             InitializeComponent();
