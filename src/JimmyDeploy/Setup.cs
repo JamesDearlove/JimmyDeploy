@@ -231,7 +231,16 @@ namespace JimmyDeploy
 
         public static bool installApp(Data.Application app)
         {
-            return false;
+            ProcessStartInfo process = new ProcessStartInfo();
+            process.FileName = app.filePath;
+            process.Arguments = app.arguments;
+
+            using (Process proc = Process.Start(process))
+            {
+                proc.WaitForExit();
+                Console.WriteLine("Exit code = " + proc.ExitCode);
+                return proc.ExitCode == 0 ? true : false;
+            }
         }
     }
 }

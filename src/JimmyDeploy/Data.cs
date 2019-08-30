@@ -24,7 +24,8 @@ namespace JimmyDeploy.Data
     public class Application
     {
         public string name { get; set; }
-        public string command { get; set; }
+        public string filePath { get; set; }
+        public string arguments { get; set; }
         public bool reboot { get; set; }
         public bool beforeDomain { get; set; }
         public int order { get; set; }
