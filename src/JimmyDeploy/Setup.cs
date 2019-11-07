@@ -165,9 +165,6 @@ namespace JimmyDeploy
 
             int parameters = JOIN_DOMAIN | ACCT_CREATE | DOMAIN_JOIN_IF_JOINED;  
 
-            MessageBox.Show(info.Username + "@" + info.Name);
-            MessageBox.Show(info.Password);
-
             object[] methodArgs = { info.Name, info.Password, info.Username + "@" + info.Name, null, parameters };
 
             ManagementObject computerSystem = new ManagementObject("Win32_ComputerSystem.Name='" + Environment.MachineName + "'");
@@ -184,8 +181,11 @@ namespace JimmyDeploy
                 Console.WriteLine("Joined Successfully!");
                 return true;
             }
-            MessageBox.Show(result.ToString());
-            //TODO: Add error codes here, 
+            // If here, domain joining has failed
+            MessageBox.Show("An error has occurred attempting to join the domain. \n Error: " + result.ToString(),
+                            "Domain Join Error",
+                            MessageBoxButton.OK, 
+                            MessageBoxImage.Error);
             return false;
         }
 

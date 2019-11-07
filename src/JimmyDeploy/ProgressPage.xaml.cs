@@ -35,13 +35,13 @@ namespace JimmyDeploy
                 if (step > Config.get().tasks.Count)
                 {
                     Setup.disableAutoLogin();
-                    MessageBox.Show("Done");
+                    MessageBox.Show("JimmyDeploy done");
                     System.Windows.Application.Current.Shutdown();
                 }
 
-                for (int i = 0; i < step; i++)
+                for (int i = 0; i < step - 1; i++)
                 {
-                    Config.get().tasks[i].progress = "Done";
+                    Config.get().tasks[i].progress = "Completed";
                 }
             }
             DataContext = Config.get().tasks;
