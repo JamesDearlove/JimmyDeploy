@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using JimmyDeploy.Data;
+using JimmyDeploy.Pages;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Media.Animation;
@@ -28,28 +29,56 @@ namespace JimmyDeploy
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public Page[] navigationOrder;
+        public List<Page> baseNavigation;
+        public List<Page> navigationOrder;
+
         public int navigationLoc = 0;
 
         public MainWindow(int step)
         {
             if (step == 0)
             {
-                //navigationOrder = new Page[] { new WelcomePage(), new ComputerSettingsPage(), new DomainPage(), new AppsPage(), new ConfirmPage(), new ProgressPage(0)};
-                navigationOrder = new Page[] { new WelcomePage(), new Pages.Steps() };
-            } else
+                //new ComputerSettingsPage(), new DomainPage(), new ConfirmPage(), new ProgressPage() 
+                baseNavigation = new List<Page> { new WelcomePage(), new StepsPage() };
+                BuildNavigationOrder();
+            } 
+            else
             {
-                navigationOrder = new Page[] { new ProgressPage(step) };
+                navigationOrder = new List<Page> { new ProgressPage() };
             }
             InitializeComponent();
             _mainFrame.NavigationService.Navigate(navigationOrder[0]);
+        }
+
+        public void BuildNavigationOrder()
+        {
+            var currentSteps = Config.get().Steps;
+
+            navigationOrder = new List<Page>(baseNavigation);
+
+            foreach (Step step in currentSteps)
+            {
+                switch (step.type)
+                {
+                    case "DomainJoin":
+                        navigationOrder.Add(new DomainPage());
+                        break;
+                    case "NameChange":
+                        navigationOrder.Add(new ComputerSettingsPage());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            navigationOrder.Add(new ProgressPage());
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             _mainFrame.NavigationService.GoBack();
             navigationLoc--;
-            if (navigationLoc < navigationOrder.Length)
+            if (navigationLoc < navigationOrder.Count)
             {
                 NextButton.IsEnabled = true;
             }
@@ -59,7 +88,7 @@ namespace JimmyDeploy
         {
             navigationLoc += 1;
             _mainFrame.NavigationService.Navigate(navigationOrder[navigationLoc]);
-            if (navigationLoc + 1 >= navigationOrder.Length)
+            if (navigationLoc + 1 >= navigationOrder.Count)
             {
                 NextButton.IsEnabled = false;
             }
@@ -72,8 +101,8 @@ namespace JimmyDeploy
 
         private async void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            //MessageDialogResult result = await this.ShowMessageAsync("Exiting", "Are you sure you want to cancel?", MessageDialogStyle.AffirmativeAndNegative);
-            //if (result == MessageDialogResult.Affirmative)
+            MessageDialogResult result = await this.ShowMessageAsync("Exiting", "Are you sure you want to cancel?", MessageDialogStyle.AffirmativeAndNegative);
+            if (result == MessageDialogResult.Affirmative)
             {
                 System.Windows.Application.Current.Shutdown();
             }
@@ -103,9 +132,9 @@ namespace JimmyDeploy
 
         private async void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //e.Cancel = true;
-            //MessageDialogResult result = await this.ShowMessageAsync("Exiting", "Are you sure you want to cancel?", MessageDialogStyle.AffirmativeAndNegative);
-            //if (result == MessageDialogResult.Affirmative)
+            e.Cancel = true;
+            MessageDialogResult result = await this.ShowMessageAsync("Exiting", "Are you sure you want to cancel?", MessageDialogStyle.AffirmativeAndNegative);
+            if (result == MessageDialogResult.Affirmative)
             {
                 System.Windows.Application.Current.Shutdown();
             }

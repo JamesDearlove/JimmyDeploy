@@ -23,9 +23,9 @@ namespace JimmyDeploy.Pages
     /// <summary>
     /// Interaction logic for Steps.xaml
     /// </summary>
-    public partial class Steps : Page
+    public partial class StepsPage : Page
     {
-        public Steps()
+        public StepsPage()
         {
             InitializeComponent();
 
@@ -39,6 +39,7 @@ namespace JimmyDeploy.Pages
             var newItem = await mainWindow.OpenNewItemWindowAsync();
 
             Config.get().Steps.Add(newItem);
+            mainWindow.BuildNavigationOrder();
         }
 
         private void ButtonRemoveItem_Click(object sender, RoutedEventArgs e)
@@ -48,6 +49,9 @@ namespace JimmyDeploy.Pages
 
             Config.get().Steps.Remove(selectedItem);
             ListViewSteps.SelectedIndex = selectedIndex;
+
+            var mainWindow = (MainWindow)Window.GetWindow(this);
+            mainWindow.BuildNavigationOrder();
         }
 
         private void ButtonExportConfig_Click(object sender, RoutedEventArgs e)

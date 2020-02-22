@@ -66,7 +66,7 @@ namespace JimmyDeploy.Data
                     case "DomainJoin":
                         return "Joining Domain: " + domain;
                     case "NameChange":
-                        return "";
+                        return "Default name: " + @default;
                     case "Reboot":
                         return "";
                     case "RunInstaller":

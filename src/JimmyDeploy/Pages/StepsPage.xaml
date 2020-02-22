@@ -1,10 +1,11 @@
-﻿<Page x:Class="JimmyDeploy.Pages.Steps"
+﻿<Page x:Class="JimmyDeploy.Pages.StepsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:JimmyDeploy.Pages"
       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="800"
       Title="Steps">
@@ -23,16 +24,26 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="35"/>
                     <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="ButtonMoveUp" Margin="0,0,5,0" Content="Up" Grid.Column="0" Click="ButtonMoveUp_Click"/>
-                <Button x:Name="ButtonMoveDown" Margin="5,0,5,0" Content="Dn" Grid.Column="1" Height="27" VerticalAlignment="Top" Click="ButtonMoveDown_Click"/>
-                <Button x:Name="ButtonAddItem" Margin="5,0,5,0" Content="Add Item" Grid.Column="3" Click="ButtonAddItem_Click"/>
-                <Button x:Name="ButtonRemoveItem" Margin="5,0,5,0" Content="Remove Item" Grid.Column="4" Click="ButtonRemoveItem_Click"/>
-                <Button x:Name="ButtonExportConfig" Margin="5,0,0,0" Content="Export Config" Grid.Column="5" Click="ButtonExportConfig_Click"/>
+                <Button x:Name="ButtonMoveUp" Margin="0,0,5,0" Grid.Column="0" Click="ButtonMoveUp_Click" Padding="0" ToolTip="Move Step Up">
+                    <iconPacks:PackIconFontAwesome Kind="ArrowUpSolid" />
+                </Button>
+                <Button x:Name="ButtonMoveDown" Margin="5,0,5,0" Grid.Column="1" Click="ButtonMoveDown_Click" Padding="0" ToolTip="Move Step Down">
+                    <iconPacks:PackIconFontAwesome Kind="ArrowDownSolid" />
+                </Button>
+                <Button x:Name="ButtonAddItem" Margin="5,0,5,0" Grid.Column="3" Click="ButtonAddItem_Click" ToolTip="Add Step">
+                    <iconPacks:PackIconFontAwesome Kind="PlusSolid" />
+                </Button>
+                <Button x:Name="ButtonRemoveItem" Margin="5,0,5,0" Grid.Column="4" Click="ButtonRemoveItem_Click" ToolTip="Remove Step">
+                    <iconPacks:PackIconFontAwesome Kind="TrashAltSolid" />
+                </Button>
+                <Button x:Name="ButtonExportConfig" Margin="5,0,0,0" Grid.Column="5" Click="ButtonExportConfig_Click" ToolTip="Export Config">
+                    <iconPacks:PackIconFontAwesome Kind="FileDownloadSolid" />
+                </Button>
             </Grid>
 
             <ListView Margin="0,10,0,10" Grid.Row="1" x:Name="ListViewSteps" ItemsSource="{Binding Mode=OneWay}" SelectionMode="Single">

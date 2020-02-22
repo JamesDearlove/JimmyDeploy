@@ -22,7 +22,7 @@ namespace JimmyDeploy
     /// </summary>
     public partial class ProgressPage : Page
     {
-        public ProgressPage(int step)
+        public ProgressPage()
         {
             InitializeComponent();
 
@@ -54,7 +54,7 @@ namespace JimmyDeploy
             mainWindow.enableNextBtn(false);
             mainWindow.enableIndicator(true);
 
-            Setup.start();
+            //Setup.start();
         }
 
         private void AppsList_TargetUpdated(object sender, DataTransferEventArgs e)
