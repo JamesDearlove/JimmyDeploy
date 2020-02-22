@@ -1,14 +1,31 @@
 # JimmyDeploy
 
-JimmyDeploy is a standalone application that helps in setting up new Windows installations.
+JimmyDeploy is a standalone application that helps in setting up new Windows installations. It is built as a replacement for the traditional Windows Server Essentials Connector for less tech savvy users to be able to get a computer up and running. 
+
+## Features
+  
+* Joins the computer to an Active Directory
+* Changes the computer's network name
+* Installs applications via exe or msi
+* Full install customisation through a JSON file
 
 ## Usage
 
-JimmyDeploy is a standalone application that requires no installation.
+A config file must be loaded for JimmyDeploy to operate. By default when it is run it will by look for a JimmyDeploy.json file to load in the apps starting directory. If not found, it will ask for you to locate a configuration to load. See the [Example.json](Example.json) for an example configuration.
 
-A config file must be loaded for JimmyDeploy to operate. Documentation for creating a config file can be found here. By default when it is run it will by look for a JimmyDeploy.json file to load in the apps starting directory. If not found, it will ask for you to locate a configuration to load.
+JimmyDeploy will ask for any additional details such as Domain Admin credentials and allows you to select commands that you do not want to run.
 
-JimmyDeploy will ask for any additional details such as Domain Admin credentials and allows you to select commands that you do not want to run. It will run automatically, and give a prompt once finished.
+## Download
+
+Coming soon
+
+## Build From Source
+
+> JimmyDeploy is in early stages of development, so chances are you will run into issues using it. It is highly recommended not to use it in a production environment unless you understand the risks.
+
+To build JimmyDeploy from source, you will need Visual Studio 2019 with the .NET Desktop Development workload installed.
+
+Open the JimmyDeploy.sln in Visual Studio and build as you would any other .NET program.
 
 ## Contributing
 
@@ -18,13 +35,12 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 * **James Dearlove** - [JamesDearlove](https://github.com/JamesDearlove)
 
-See also the list of [contributors](https://github.com/JamesDearlove/JimmyDeploy/contributors) who participated in this project.
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
 * [MahApps.Metro](https://mahapps.com/)
 * [Newtonsoft.Json](https://www.newtonsoft.com/json)
+* [Font Awesome](https://fontawesome.com/)
