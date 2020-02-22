@@ -26,25 +26,25 @@ namespace JimmyDeploy
         {
             InitializeComponent();
 
-            if (step != 0)
-            {
-                Config.get().autoLogin = true;
-                Config.get().setupTaskList();
-                Setup.removeStartup();
+            //if (step != 0)
+            //{
+            //    Config.get().AutoLogin = true;
+            //    Config.get().setupTaskList();
+            //    Setup.removeStartup();
 
-                if (step > Config.get().tasks.Count)
-                {
-                    Setup.disableAutoLogin();
-                    MessageBox.Show("JimmyDeploy done");
-                    System.Windows.Application.Current.Shutdown();
-                }
+            //    if (step > Config.get().tasks.Count)
+            //    {
+            //        Setup.disableAutoLogin();
+            //        MessageBox.Show("JimmyDeploy done");
+            //        System.Windows.Application.Current.Shutdown();
+            //    }
 
-                for (int i = 0; i < step - 1; i++)
-                {
-                    Config.get().tasks[i].progress = "Completed";
-                }
-            }
-            DataContext = Config.get().tasks;
+            //    for (int i = 0; i < step - 1; i++)
+            //    {
+            //        Config.get().tasks[i].progress = "Completed";
+            //    }
+            //}
+            //DataContext = Config.get().tasks;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

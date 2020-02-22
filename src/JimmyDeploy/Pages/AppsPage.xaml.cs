@@ -26,7 +26,7 @@ namespace JimmyDeploy
         {
             InitializeComponent();
 
-            DataContext = Config.get().getApplications();
+            //DataContext = Config.get().getApplications();
         }
 
     }

@@ -25,15 +25,15 @@ namespace JimmyDeploy
         {
             InitializeComponent();
 
-            ConfigText.Text = "Loaded Config File: " + Config.get().configLocation;
+            ConfigText.Text = "Loaded Config File: " + Config.get().ConfigLocation;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
-                Config.get().configLocation = openFileDialog.FileName;
-                ConfigText.Text = "Loaded Config File: " + Config.get().configLocation;
+                Config.get().ConfigLocation = openFileDialog.FileName;
+                ConfigText.Text = "Loaded Config File: " + Config.get().ConfigLocation;
         }
     }
 }

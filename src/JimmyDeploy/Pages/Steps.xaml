@@ -1,0 +1,48 @@
+﻿<Page x:Class="JimmyDeploy.Pages.Steps"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JimmyDeploy.Pages"
+      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="800"
+      Title="Steps">
+
+    <controls:MetroContentControl>
+        <DockPanel Margin="40,40,40,20">
+            <StackPanel DockPanel.Dock="Top">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="What's the Plan?" FontSize="20"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,10,0,0">
+                    Below are all the steps that will be performed. Add or remove steps you want to be completed, and optionally save a config
+                    file which you can use later.
+                </TextBlock>
+            </StackPanel>
+
+            <Grid Grid.Row="2" Margin="0,0,0,0" DockPanel.Dock="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="ButtonMoveUp" Margin="0,0,5,0" Content="Up" Grid.Column="0" Click="ButtonMoveUp_Click"/>
+                <Button x:Name="ButtonMoveDown" Margin="5,0,5,0" Content="Dn" Grid.Column="1" Height="27" VerticalAlignment="Top" Click="ButtonMoveDown_Click"/>
+                <Button x:Name="ButtonAddItem" Margin="5,0,5,0" Content="Add Item" Grid.Column="3" Click="ButtonAddItem_Click"/>
+                <Button x:Name="ButtonRemoveItem" Margin="5,0,5,0" Content="Remove Item" Grid.Column="4" Click="ButtonRemoveItem_Click"/>
+                <Button x:Name="ButtonExportConfig" Margin="5,0,0,0" Content="Export Config" Grid.Column="5" Click="ButtonExportConfig_Click"/>
+            </Grid>
+
+            <ListView Margin="0,10,0,10" Grid.Row="1" x:Name="ListViewSteps" ItemsSource="{Binding Mode=OneWay}" SelectionMode="Single">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True">
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding niceType}" Header="Task"/>
+                        <GridViewColumn Width="350" DisplayMemberBinding="{Binding details}" Header="Details"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+    </controls:MetroContentControl>
+</Page>

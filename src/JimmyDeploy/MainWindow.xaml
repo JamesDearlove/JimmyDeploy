@@ -14,7 +14,6 @@
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
 
-
     <DockPanel>
         <Grid DockPanel.Dock="Bottom">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4,0,5">
@@ -26,6 +25,6 @@
             
         </Grid>
         <Separator DockPanel.Dock="Bottom" Margin="5,0,5,0" Background="#FFD4D4D4"/>
-        <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden" Navigated="_mainFrame_Navigated"/>
+        <Frame x:Name="_mainFrame" NavigationUIVisibility="Hidden" Navigated="_mainFrame_Navigated" DockPanel.Dock="Top"/>
     </DockPanel>
 </Controls:MetroWindow>

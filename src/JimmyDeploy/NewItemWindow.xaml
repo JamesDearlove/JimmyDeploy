@@ -1,0 +1,64 @@
+﻿<simpleChildWindow:ChildWindow 
+    x:Class="JimmyDeploy.NewItemWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    
+    Title="Add Step"
+    Padding="15"
+    d:DesignHeight="400"
+    d:DesignWidth="400"
+    AllowMove="True"
+    ShowCloseButton="True"
+    mc:Ignorable="d"
+    IsOpen="True">
+    
+
+    <simpleChildWindow:ChildWindow.OverlayBrush>
+        <SolidColorBrush Opacity="0.8" Color="{StaticResource Gray2}" />
+        <!--  or like the MahApps overlay
+    <SolidColorBrush Opacity="0.7" Color="{StaticResource BlackColor}" />
+    -->
+    </simpleChildWindow:ChildWindow.OverlayBrush>
+
+    <StackPanel Margin="20">
+
+        <Grid>
+            <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="Step Type:" VerticalAlignment="Center" TextAlignment="Right" Height="16" Grid.Row="0"/>
+            <ComboBox x:Name="ComboBoxType" Margin="0,5,0,5" Grid.Row="0" Grid.Column="1" IsEnabled="False">
+                <ComboBoxItem Name="RunInstaller" IsSelected="True" Content="Run Installer"/>
+            </ComboBox>
+            <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Center" TextAlignment="Right" Height="16" Grid.Row="1"/>
+            <TextBox x:Name="TextBoxName" Margin="0,5,0,5" TextWrapping="NoWrap" Text="" Grid.Row="1" Grid.Column="1"/>
+            <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="Setup Type:" VerticalAlignment="Center" TextAlignment="Right" Height="16" Grid.Row="2"/>
+            <ComboBox x:Name="ComboBoxSetupType" Margin="0,5,0,5" Grid.Row="2" Grid.Column="1">
+                <ComboBoxItem Name="exe" IsSelected="True" Content="exe"/>
+                <ComboBoxItem Name="msi" Content="msi"/>
+            </ComboBox>
+            <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="Setup File:" VerticalAlignment="Center" TextAlignment="Right" Height="16" Grid.Row="3"/>
+            <TextBox x:Name="TextBoxFile" Margin="0,5,0,5" TextWrapping="NoWrap" Text="" Grid.Row="3" Grid.Column="1"/>
+            <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="Arguments:" VerticalAlignment="Center" TextAlignment="Right" Height="16" Grid.Row="4"/>
+            <TextBox x:Name="TextBoxArgs" Margin="0,5,0,5" TextWrapping="NoWrap" Text="" Grid.Row="4" Grid.Column="1"/>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="ButtonAdd" Margin="5" Content="Add" Click="ButtonAdd_Click" />
+            <Button x:Name="ButtonCancel" Margin="5" Content="Cancel" Click="ButtonCancel_Click" />
+        </StackPanel>
+    </StackPanel>
+</simpleChildWindow:ChildWindow>

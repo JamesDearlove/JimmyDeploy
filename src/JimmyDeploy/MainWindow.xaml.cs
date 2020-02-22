@@ -19,6 +19,7 @@ using JimmyDeploy.Data;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Media.Animation;
+using MahApps.Metro.SimpleChildWindow;
 
 namespace JimmyDeploy
 {
@@ -34,7 +35,8 @@ namespace JimmyDeploy
         {
             if (step == 0)
             {
-                navigationOrder = new Page[] { new WelcomePage(), new ComputerSettingsPage(), new DomainPage(), new AppsPage(), new ConfirmPage(), new ProgressPage(0)};
+                //navigationOrder = new Page[] { new WelcomePage(), new ComputerSettingsPage(), new DomainPage(), new AppsPage(), new ConfirmPage(), new ProgressPage(0)};
+                navigationOrder = new Page[] { new WelcomePage(), new Pages.Steps() };
             } else
             {
                 navigationOrder = new Page[] { new ProgressPage(step) };
@@ -70,8 +72,8 @@ namespace JimmyDeploy
 
         private async void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageDialogResult result = await this.ShowMessageAsync("Exiting", "Are you sure you want to cancel?", MessageDialogStyle.AffirmativeAndNegative);
-            if (result == MessageDialogResult.Affirmative)
+            //MessageDialogResult result = await this.ShowMessageAsync("Exiting", "Are you sure you want to cancel?", MessageDialogStyle.AffirmativeAndNegative);
+            //if (result == MessageDialogResult.Affirmative)
             {
                 System.Windows.Application.Current.Shutdown();
             }
@@ -92,11 +94,18 @@ namespace JimmyDeploy
             ProgressIndicator.IsActive = value;
         }
 
+        public async Task<Data.Step> OpenNewItemWindowAsync()
+        {
+            var result = await this.ShowChildWindowAsync<Data.Step>(new NewItemWindow());
+
+            return result;
+        }
+
         private async void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = true;
-            MessageDialogResult result = await this.ShowMessageAsync("Exiting", "Are you sure you want to cancel?", MessageDialogStyle.AffirmativeAndNegative);
-            if (result == MessageDialogResult.Affirmative)
+            //e.Cancel = true;
+            //MessageDialogResult result = await this.ShowMessageAsync("Exiting", "Are you sure you want to cancel?", MessageDialogStyle.AffirmativeAndNegative);
+            //if (result == MessageDialogResult.Affirmative)
             {
                 System.Windows.Application.Current.Shutdown();
             }
@@ -106,7 +115,7 @@ namespace JimmyDeploy
         {
             Version version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version;
             string currentV = string.Format("Version: {0}.{1}", version.Major, version.Minor);
-            await this.ShowMessageAsync("About", "Jimmy Deployer - Written by James Dearlove \n" + currentV, MessageDialogStyle.Affirmative);
+            await this.ShowMessageAsync("About", "JimmyDeploy - Written by James Dearlove \n" + currentV, MessageDialogStyle.Affirmative);
         }
 
         public void updateNextButton(string value)
